@@ -1,6 +1,6 @@
 module Main where
 
-import Three
+import Four
 
 main :: IO ()
 main = putStrLn run
