@@ -15,7 +15,7 @@ cabal-version:       >=1.10
 
 library
   hs-source-dirs:      src
-  exposed-modules:     Primes, One, Two, Three, Four, Five, Six, Seven
+  exposed-modules:     Primes, One, Two, Three, Four, Five, Six, Seven, Eight
   build-depends:       base >= 4.7 && < 5
   default-language:    Haskell2010
 
