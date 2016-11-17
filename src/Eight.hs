@@ -1,5 +1,7 @@
 module Eight where
 
+import Arrays (window)
+
 run :: String
 run = show result
   where
@@ -25,8 +27,3 @@ run = show result
             \71636269561882670428252483600823257530420752963450"
     digits = map (read . pure) input :: [Integer]
     result = maximum . map product . window 13 $ digits
-
-
-window :: Int -> [a] -> [[a]]
-window n xs | length xs >= n = take n xs : window n (drop 1 xs)
-            | otherwise      = []
