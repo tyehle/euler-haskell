@@ -1,14 +1,13 @@
 module Main where
 
-import Eighteen
+import P067
 
 import System.CPUTime
 
 main :: IO ()
 main = do
   start <- getCPUTime
-  let result = run
+  run
   end <- getCPUTime
-  putStrLn result
   let diff = fromIntegral (end - start) / (10^12)
   putStrLn $ "Computation time: "++show diff++" sec"
