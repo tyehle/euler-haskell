@@ -4,7 +4,7 @@ run :: String
 run = show . length . filter (/= '-') . filter (/= ' ') . concatMap asWords $ [1..1000]
 
 asWords :: Integer -> String
-asWords n | n < 1 || n >= 100000 = undefined
+asWords n | n >= 100000 = undefined
           | n > 999 = asWords (n `div` 1000) ++ " thousand" ++ doLower (n `mod` 1000)
           | n > 99  = asWords (n `div` 100) ++ " hundred" ++ doLower (n `mod` 100)
           | n > 89 = lastTwo "ninety" n
@@ -34,6 +34,8 @@ asWords n | n < 1 || n >= 100000 = undefined
           | n == 3  = "three"
           | n == 2  = "two"
           | n == 1  = "one"
+          | n == 0  = "zero"
+          | n < 0 = "negative " ++ asWords (negate n)
   where
     lastTwo tens l = tens ++ afterTens (l `mod` 10)
     afterTens 0 = ""

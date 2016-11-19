@@ -1,6 +1,6 @@
 module Main where
 
-import Seventeen
+import Eighteen
 
 import System.CPUTime
 
