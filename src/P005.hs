@@ -1,12 +1,12 @@
-module Five where
+module P005 where
 
 import Primes (primes)
 
 import Data.Maybe (fromJust)
 import Data.Foldable (find)
 
-run :: String
-run = show result
+run :: IO ()
+run = print result
   where
     high = 20
     relavantPrimes = takeWhile (<= high) primes

@@ -1,9 +1,7 @@
-module Two
-    ( run
-    ) where
+module P002 where
 
-run :: String
-run = show result
+run :: IO ()
+run = print result
   where
     result = sum . filter even . takeWhile (< 4000000) $ fibFrom 1 2
     test = take 20 $ fibFrom 1 2

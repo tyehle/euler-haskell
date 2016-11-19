@@ -1,7 +1,7 @@
-module Four where
+module P004 where
 
-run :: String
-run = show result
+run :: IO ()
+run = print result
   where
     factors = [100..999]
     products = concatMap (\a -> map (a*) factors) factors

@@ -1,10 +1,10 @@
-module Nine where
+module P009 where
 
 import Data.Foldable (find)
 import Data.Maybe (fromJust, mapMaybe)
 
-run :: String
-run = show . mult $ triple
+run :: IO ()
+run = print . mult $ triple
   where
     triple = fromJust . find (\(a,b,c) -> a+b+c == 1000) $ triples
     mult (a,b,c) = a*b*c

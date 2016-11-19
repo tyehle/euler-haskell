@@ -1,7 +1,7 @@
-module Eighteen where
+module P018 where
 
-run :: String
-run = show result
+run :: IO ()
+run = print result
   where
     result = head $ foldr (\line totals -> zipWith (+) line (bestOfChildren totals)) (repeat 0) nums
     bestOfChildren line = zipWith max line (tail line)

@@ -1,9 +1,9 @@
-module Eleven where
+module P011 where
 
 import Arrays
 
-run :: String
-run = show . maximum . map product $ groups
+run :: IO ()
+run = print . maximum . map product $ groups
   where
     groups = concatMap (($ grid) . ($ 4)) [verticalWindow, horizontalWindow, forwardDiagWindow, backwardDiagWindow]
 

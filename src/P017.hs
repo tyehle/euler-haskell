@@ -1,7 +1,7 @@
-module Seventeen where
+module P017 where
 
-run :: String
-run = show . length . filter (/= '-') . filter (/= ' ') . concatMap asWords $ [1..1000]
+run :: IO ()
+run = print . length . filter (/= '-') . filter (/= ' ') . concatMap asWords $ [1..1000]
 
 asWords :: Integer -> String
 asWords n | n >= 100000 = undefined

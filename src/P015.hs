@@ -1,7 +1,7 @@
-module Fifteen where
+module P015 where
 
-run :: String
-run = show $ choose 40 20
+run :: IO ()
+run = print $ choose 40 20
 
 choose :: Integer -> Integer -> Integer
 choose n 0 = 1

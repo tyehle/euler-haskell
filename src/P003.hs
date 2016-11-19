@@ -1,9 +1,9 @@
-module Three where
+module P003 where
 
 import Primes (primeFactors)
 
-run :: String
-run = show result
+run :: IO ()
+run = print result
   where
     n = 600851475143
     result = last . primeFactors $ n

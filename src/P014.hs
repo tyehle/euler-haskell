@@ -1,9 +1,9 @@
-module Fourteen where
+module P014 where
 
 import Data.Foldable (maximumBy)
 
-run :: String
-run = show result
+run :: IO ()
+run = print result
   where
     result = fst . maximumBy (\a b -> snd a `compare` snd b) . map (\n -> (n, collatzLength n)) $ [1..1000000]
 
