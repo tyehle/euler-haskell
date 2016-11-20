@@ -1,6 +1,6 @@
 module Main where
 
-import P019
+import P020
 
 import System.CPUTime
 
