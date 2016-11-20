@@ -1,12 +1,22 @@
 module Primes where
 
+import Data.List (group, tails, (\\))
 import Data.Maybe (fromJust)
 import Data.Foldable (find)
 import Data.IntSet (IntSet)
 import qualified Data.IntSet as IntSet
 
+factors :: Integer -> [Integer]
+factors n = foldl (\factors pfs -> factors >>= (\factor -> map (factor *) pfs)) [1] pureFs
+  where
+    pureFs = map (map product . tails) . group . primeFactors $ n
+
+divisors :: Integer -> [Integer]
+divisors n = factors n \\ [n]
+
 primeFactors :: Integer -> [Integer]
-primeFactors n | n <= 1    = []
+primeFactors n | n < 1     = undefined
+               | n == 1    = []
                | otherwise = factor:primeFactors (n `div` factor)
   where
     factor = fromJust $ find (isDivisible n) primes
