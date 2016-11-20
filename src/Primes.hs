@@ -3,16 +3,15 @@ module Primes where
 import Data.List (group, tails, (\\))
 import Data.Maybe (fromJust)
 import Data.Foldable (find)
-import Data.IntSet (IntSet)
-import qualified Data.IntSet as IntSet
+
+
+divisors :: Integer -> [Integer]
+divisors n = factors n \\ [n]
 
 factors :: Integer -> [Integer]
 factors n = foldl (\factors pfs -> factors >>= (\factor -> map (factor *) pfs)) [1] pureFs
   where
     pureFs = map (map product . tails) . group . primeFactors $ n
-
-divisors :: Integer -> [Integer]
-divisors n = factors n \\ [n]
 
 primeFactors :: Integer -> [Integer]
 primeFactors n | n < 1     = undefined
@@ -20,28 +19,20 @@ primeFactors n | n < 1     = undefined
                | otherwise = factor:primeFactors (n `div` factor)
   where
     factor = fromJust $ find (isDivisible n) primes
+    isDivisible n f = n `mod` f == 0
 
-primesUnder :: Int -> [Int]
-primesUnder n = sieve $ IntSet.fromAscList [2..n]
-  where
-    sieve remaining | IntSet.null remaining = []
-                    | otherwise = let (prime, others) = IntSet.deleteFindMin remaining in
-                                    prime : sieve (others `IntSet.difference` IntSet.fromAscList [prime, prime+prime .. n])
+-- define this operation on ordered lists
+minus :: Ord a => [a] -> [a] -> [a]
+minus (x:xs) (y:ys) = case compare x y of
+           LT -> x : minus  xs  (y:ys)
+           EQ ->     minus  xs     ys
+           GT ->     minus (x:xs)  ys
+minus  xs     _     = xs
 
 primes :: [Integer]
-primes = 2:remainingPrimes [2]
-
-remainingPrimes :: [Integer] -> [Integer]
-remainingPrimes primes = next : remainingPrimes (next:primes)
-  where next = nextPrime primes
-
-nextPrime :: [Integer] -> Integer
-nextPrime primes@(largest:others) = fromJust $ find (isPrime primes) [largest+1..]
-
-isPrime :: [Integer] -> Integer -> Bool
-isPrime reverseSmallerPrimes n = all (not . isDivisible n) $ dropWhile (> maxFactor) reverseSmallerPrimes
+primes = 2 : oddprimes
   where
-    maxFactor = floor . sqrt . fromInteger $ n
-
-isDivisible :: Integer -> Integer -> Bool
-isDivisible n f = n `mod` f == 0
+    oddprimes = sieve [3,5..] 9 oddprimes
+    sieve (x:xs) q ps@ ~(p:t)
+      | x < q     = x : sieve xs q ps
+      | otherwise =     sieve (xs `minus` [q, q+2*p..]) (head t^2) t
