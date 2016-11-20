@@ -1,6 +1,6 @@
 module Main where
 
-import P067
+import P019
 
 import System.CPUTime
 
@@ -10,4 +10,4 @@ main = do
   run
   end <- getCPUTime
   let diff = fromIntegral (end - start) / (10^12)
-  putStrLn $ "Computation time: "++show diff++" sec"
+  putStrLn $ "Computation time: " ++ show diff ++ " sec"

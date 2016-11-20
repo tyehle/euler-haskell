@@ -15,7 +15,7 @@ cabal-version:       >=1.10
 
 library
   hs-source-dirs:      src
-  exposed-modules:     P067
+  exposed-modules:     P019
                      , Primes
                      , Arrays
   build-depends:       base >= 4.7 && < 5
