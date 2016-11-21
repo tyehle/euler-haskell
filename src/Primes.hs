@@ -1,4 +1,7 @@
-module Primes where
+module Primes
+  ( divisors, factors, primeFactors
+  , primes
+  ) where
 
 import Data.List (group, tails, (\\))
 import Data.Maybe (fromJust)
