@@ -15,7 +15,7 @@ cabal-version:       >=1.10
 
 library
   hs-source-dirs:      src
-  exposed-modules:     P093
+  exposed-modules:     P096
                      , Primes
                      , Arrays
                      , Fibonacci
@@ -23,6 +23,8 @@ library
   build-depends:       base >= 4.7 && < 5
                      , containers
                      , array
+                     , sudoku
+                     , random
   default-language:    Haskell2010
 
 executable euler

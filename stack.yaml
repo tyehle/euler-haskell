@@ -36,7 +36,11 @@ resolver: lts-7.9
 # non-dependency (i.e. a user package), and its test suites and benchmarks
 # will not be run. This is useful for tweaking upstream packages.
 packages:
-- '.'
+- location: .
+- location:
+    git: git@github.com:tyehle/sudoku.git
+    commit: f5dac8f8fffa41d526e8d6a67b8fbb776f1788d7
+  extra-dep: true
 # Dependency packages to be pulled from upstream that are not in the resolver
 # (e.g., acme-missiles-0.3)
 extra-deps: []
