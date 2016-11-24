@@ -45,11 +45,14 @@ digits :: [[Rational]]
 digits = allChoices 4 [0..9]
 
 ops :: [[Rational -> Rational -> Maybe Rational]]
-ops = allChoicesWithReplacement 3 [wrapJust (+), wrapJust (-), wrapJust (*), maybeDiv]
+ops = allChoicesWithReplacement 3 [wrapJust (+), wrapJust (-), wrapJust (*), floorDiv]
   where
     wrapJust op a b = Just $ op a b
     maybeDiv a 0 = Nothing
     maybeDiv a b = Just $ a / b
+    rationalFloor a = (numerator a - (numerator a `mod` denominator a)) % denominator a
+    floorDiv a 0 = Nothing
+    floorDiv a b = Just . rationalFloor $ a / b
 
 toNum :: (Num a, Eq a) => Maybe (Ratio a) -> Maybe a
 toNum Nothing = Nothing
